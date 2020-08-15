@@ -58,5 +58,5 @@ if __name__ == "__main__":
     field_df = scrape_UCPD_data(data_type = "Field Interview")
     traffic_df = scrape_UCPD_data(data_type = "Traffic")
 
-    field_df.to_csv("../data/field_interview_df.csv")
-    traffic_df.to_csv("../data/traffic_df.csv")
+    field_df.to_csv("../data/field_interview_df.csv", index = False)
+    traffic_df.to_csv("../data/traffic_df.csv", index = False)

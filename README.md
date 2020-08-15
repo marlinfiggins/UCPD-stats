@@ -16,3 +16,5 @@ Also, thanks to [Damon Jones](https://harris.uchicago.edu/directory/damon-jones)
 - Start visualization process
 - Flesh out README.md to illustrate steps to reproduce my work.
 - Add snakemake pipeline
+- Investigate relationship between stops and University property.
+- Does the spatial distribution of stops change over time and what do these changes correspond with to my knowledge?
