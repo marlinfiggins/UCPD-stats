@@ -56,7 +56,7 @@ def scrape_UCPD_data(start_date = "06-01-2015", end_date = None,
 
 if __name__ == "__main__":
     field_df = scrape_UCPD_data(data_type = "Field Interview")
-    traffic_df = scrape_UCPD_data(max_page = 10, data_type = "Traffic")
+    traffic_df = scrape_UCPD_data(data_type = "Traffic")
 
     field_df.to_csv("../data/field_interview_df.csv")
     traffic_df.to_csv("../data/traffic_df.csv")
