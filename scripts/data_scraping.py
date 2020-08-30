@@ -2,10 +2,11 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup as bs
 import datetime
-import os
 
-def scrape_UCPD_data(start_date = "06-01-2015", end_date = None,
-                     max_page = None, data_type = "Field Interview"):
+
+def scrape_UCPD_data(
+    start_date="06-01-2015", end_date=None, max_page=None, data_type="Field Interview"
+):
 
     """
     Scraps University of Chicago Police Department's website.
@@ -19,7 +20,7 @@ def scrape_UCPD_data(start_date = "06-01-2015", end_date = None,
     """
 
     # Initializing date_range
-    if end_date == None:
+    if end_date is None:
         end_date = datetime.datetime.now().strftime("%m-%d-%Y")
 
     start_date = start_date.replace("-", "%2F")
@@ -27,18 +28,17 @@ def scrape_UCPD_data(start_date = "06-01-2015", end_date = None,
     date_range = f"startDate={start_date}&endDate={end_date}"
 
     # Forming search url
-    if data_type == "Field Interview": # Find appropriate search type
+    if data_type == "Field Interview":  # Find appropriate search type
         ucpd_site = "https://incidentreports.uchicago.edu/fieldInterviewsArchive.php?"
     elif data_type == "Traffic":
         ucpd_site = "https://incidentreports.uchicago.edu/trafficStopsArchive.php?"
 
-
     base_url = ucpd_site + date_range
 
-    if max_page == None: # unless specified do maximum query
+    if max_page is None:  # unless specified do maximum query
         page = requests.get(base_url)
         soup = bs(page.text)
-        page_counter = soup.find_all('li', {"class": "page-count"})
+        page_counter = soup.find_all("li", {"class": "page-count"})
         max_page = int(page_counter[0].text.split()[-1])
 
     # Scraping Data
@@ -54,9 +54,10 @@ def scrape_UCPD_data(start_date = "06-01-2015", end_date = None,
     df = pd.concat(df_list)
     return df
 
-if __name__ == "__main__":
-    field_df = scrape_UCPD_data(data_type = "Field Interview")
-    traffic_df = scrape_UCPD_data(data_type = "Traffic")
 
-    field_df.to_csv("../data/field_interview_df.csv", index = False)
-    traffic_df.to_csv("../data/traffic_df.csv", index = False)
+if __name__ == "__main__":
+    field_df = scrape_UCPD_data(data_type="Field Interview")
+    traffic_df = scrape_UCPD_data(data_type="Traffic")
+
+    field_df.to_csv("../data/field_interview_df.csv", index=False)
+    traffic_df.to_csv("../data/traffic_df.csv", index=False)
